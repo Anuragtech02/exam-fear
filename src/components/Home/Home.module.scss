@@ -13,9 +13,6 @@
   padding: 50px 0;
   max-width: 70vw;
 
-  .detailsContainer {
-    min-width: 50vw;
-  }
   .leftContainer {
     @extend .flexColumn;
     align-items: flex-start;
@@ -144,4 +141,23 @@
 }
 .muiContainer {
   min-width: 60vh !important;
+}
+.questionContainer {
+  margin: 20px 0;
+  h3 {
+    font-weight: 600;
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .detailsContainer {
+    width: 100%;
+    .addOptionBtn {
+      width: 100% !important;
+      border-color: var(--primaryDark);
+      color: var(--primaryDark);
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+  }
 }

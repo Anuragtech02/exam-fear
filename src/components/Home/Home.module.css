@@ -33,10 +33,6 @@
   max-width: 70vw;
 }
 
-.container .detailsContainer {
-  min-width: 50vw;
-}
-
 .container .leftContainer {
   -webkit-box-align: start;
       -ms-flex-align: start;
@@ -181,5 +177,27 @@
 
 .muiContainer {
   min-width: 60vh !important;
+}
+
+.questionContainer {
+  margin: 20px 0;
+}
+
+.questionContainer h3 {
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.questionContainer .detailsContainer {
+  width: 100%;
+}
+
+.questionContainer .detailsContainer .addOptionBtn {
+  width: 100% !important;
+  border-color: var(--primaryDark);
+  color: var(--primaryDark);
+  font-weight: 600;
+  text-transform: capitalize;
 }
 /*# sourceMappingURL=Home.module.css.map */

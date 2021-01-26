@@ -9,8 +9,18 @@
   background: #e0f8e7 !important;
 }
 :root {
-  --primaryColor: #e0f8e7;
+  --primaryColor: #c0f5d0;
   --primaryDark: #07521e;
+}
+/*Custom Scrollbar*/
+::-webkit-scrollbar {
+  width: 5px;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2) !important;
+  /* border-radius: 10px; */
 }
 .container {
   display: flex;

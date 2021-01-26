@@ -29,7 +29,7 @@ const CustomTabs = ({ tab1, tab2, tab3, index, complete }) => {
               <CheckIcon />
             ) : (
               <ReportProblemIcon className={styles.reportIcon} />
-            )}{" "}
+            )}
           </div>
         </div>
       </TabPane>

@@ -14,6 +14,10 @@ import {
   TextField,
   Card,
   Button,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -22,6 +26,7 @@ import study from "../../Assets/study.webp";
 import AddIcon from "@material-ui/icons/Add";
 import QuestionAnswerSharpIcon from "@material-ui/icons/QuestionAnswerSharp";
 import CustomTabs from "../CustomTabs/CustomTabs";
+import RichTextEditor from "react-rte";
 
 const Home = () => {
   const { data } = useContext(GlobalContext);
@@ -41,18 +46,21 @@ const Home = () => {
             "Differentiate among JDK, JRE and JVM. Why java is called platform independent?",
           answer: "",
           answerType: "text",
+          complete: true,
         },
         {
           title:
             "Define constructor? When do we need Constructor Overloading? What are private constructors and where are they used?",
           answer: "",
           answerType: "image",
+          complete: true,
         },
         {
           title:
             "Write a program to test the following method that returns digit number k of the positive integer n:",
           answer: "",
           answerType: "link",
+          complete: true,
         },
       ],
     },
@@ -64,18 +72,21 @@ const Home = () => {
             "Predict the outcome of the following program. Also justify your answer.",
           answer: "",
           answerType: "text",
+          complete: true,
         },
         {
           title:
             "Explain various control statements used in java with example.",
           answer: "",
           answerType: "image",
+          complete: true,
         },
         {
           title:
             "Write a program to test the following recursive method that returns the nth triangular number: static long t(int n)",
           answer: "",
           answerType: "link",
+          complete: true,
         },
       ],
     },
@@ -87,18 +98,21 @@ const Home = () => {
             "We can’t instantiate an abstract class. Then why constructors are allowed in abstract class? ",
           answer: "",
           answerType: "text",
+          complete: false,
         },
         {
           title:
             "Differentiate between interface and abstract class with example. Predict the outcome of the following program. Also justify your answer.",
           answer: "",
           answerType: "image",
+          complete: false,
         },
         {
           title:
             "How association, aggregation and composition are related to each other? Write a program to illustrate composition.",
           answer: "",
           answerType: "link",
+          complete: false,
         },
       ],
     },
@@ -110,17 +124,20 @@ const Home = () => {
             "Can we synchronize the run method? If yes then what will be the behaviour? ",
           answer: "",
           answerType: "text",
+          complete: true,
         },
         {
           title:
             "Write a program to illustrate the important methods in java for inter-thread communication?",
           answer: "",
           answerType: "image",
+          complete: true,
         },
         {
           title: "Can we override start() method of thread class? Give reason.",
           answer: "",
           answerType: "link",
+          complete: true,
         },
       ],
     },
@@ -132,32 +149,37 @@ const Home = () => {
             "What is an applet? Explain various methods used during the life cycle of an applet.",
           answer: "",
           answerType: "text",
+          complete: false,
         },
         {
           title:
             "Describe hierarchy of I/O streams. Write a program to count the number of spaces, words and newlines in a text file.",
           answer: "",
           answerType: "image",
+          complete: false,
         },
         {
           title:
             "Explain Event Delegation model. Write a program to illustrate event handling for mouse.",
           answer: "",
           answerType: "link",
+          complete: true,
         },
       ],
     },
   ]);
   const [questBack, setQuestBack] = useState(questions);
+  const [openAnswer, setOpenAnswer] = useState(false);
+  // const [openAnswer, setOpenAnswer] = useState(false);
 
   useEffect(() => {
     let qParts = [];
-    questions.forEach((item) => {
+    questBack.forEach((item) => {
       qParts.push(...item.parts);
     });
     console.log(qParts);
     setQuestionParts(qParts);
-  }, [questions]);
+  }, [questBack]);
 
   useEffect(() => {
     setQuestBack(questions);
@@ -178,6 +200,10 @@ const Home = () => {
       setQuestions(questBack);
     }
     console.log(value);
+  };
+
+  const handleCloseAnswer = () => {
+    setOpenAnswer(false);
   };
 
   return (
@@ -245,7 +271,10 @@ const Home = () => {
       <Grid container spacing={2} style={{ margin: "20px 0" }}>
         <Grid item xl={3} lg={4} md={4} sm={6} xs={12}>
           <Card style={{ height: "100%" }}>
-            <Button className={styles.addAnswerBtn}>
+            <Button
+              onClick={() => setOpenAnswer(true)}
+              className={styles.addAnswerBtn}
+            >
               <QuestionAnswerSharpIcon />
               &nbsp; Add Answer
             </Button>
@@ -259,6 +288,11 @@ const Home = () => {
           );
         })}
       </Grid>
+      <AddAnswerModal
+        open={openAnswer}
+        handleClose={handleCloseAnswer}
+        questions={questBack}
+      />
     </div>
   );
 };
@@ -304,7 +338,52 @@ const CardComponent = ({ question, index }) => {
   );
 };
 
-const QuestionComponent = ({ question, complete }) => {
+const AddAnswerModal = ({ questions, open, handleClose }) => {
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">{"Add Answer"}</DialogTitle>
+      <DialogContent>
+        <div className={styles.dialogContent}>
+          {questions.map((question, i) => {
+            return (
+              <div key={"question" + i} className={styles.questionContainer}>
+                <h3>Question {i + 1}</h3>
+                {question.parts.map((part) => {
+                  return (
+                    <CustomAccordion question={part} complete={part.complete} />
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Cancel
+        </Button>
+        {/* <Button onClick={handleClose} color="primary" autoFocus>
+        Agree
+      </Button> */}
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+const CustomAccordion = ({ complete, question }) => {
+  const [textEditor, setTextEditor] = useState(false);
+  const [imageEditor, setImageEditor] = useState(false);
+  const [linkEditor, setLinkEditor] = useState(false);
+
+  const [text, setText] = useState("");
+  const [link, setLink] = useState("");
+  const [image, setImage] = useState("");
+
   return (
     <Accordion className={styles.question}>
       <AccordionSummary
@@ -324,26 +403,80 @@ const QuestionComponent = ({ question, complete }) => {
       </AccordionSummary>
       <AccordionDetails>
         <div className={styles.detailsContainer}>
-          {question.parts.map((item) =>
-            item.answered && item.answered.length ? (
-              <div>
-                <h3>{item.title}</h3>
-                {item.answerType === "text" ? (
-                  <p>{item.answerType}</p>
-                ) : item.answerType === "image" ? (
-                  <img src={item.answer} alt="" />
-                ) : null}
-              </div>
-            ) : (
-              <div>
-                {" "}
-                <h3>{item.title}</h3>
-                <p>Not answered Yet</p>
-              </div>
-            )
+          {question.answer ? question.answer : null}
+          {textEditor && (
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className={styles.inputField}
+              placeholder="Enter Text"
+            />
           )}
+          {imageEditor && (
+            <input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className={styles.inputField}
+              placeholder="Enter Text"
+            />
+          )}
+          {linkEditor && (
+            <input
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              className={styles.inputField}
+              placeholder="Enter Link"
+            />
+          )}
+          <Grid container spacing={2}>
+            <Grid item md={4}>
+              <Button
+                onClick={() => setTextEditor(true)}
+                variant="outlined"
+                className={styles.addOptionBtn}
+              >
+                Text
+              </Button>
+            </Grid>
+            <Grid item md={4}>
+              <Button
+                onClickk={() => setImageEditor(true)}
+                variant="outlined"
+                className={styles.addOptionBtn}
+              >
+                Image
+              </Button>
+            </Grid>
+            <Grid item md={4}>
+              <Button
+                onClick={() => setLinkEditor(true)}
+                variant="outlined"
+                className={styles.addOptionBtn}
+              >
+                Link
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       </AccordionDetails>
     </Accordion>
+  );
+};
+
+const CustomEditor = (props) => {
+  const [value, setValue] = useState(RichTextEditor.createEmptyValue());
+  const onChange = (value) => {
+    setValue(value);
+    if (props.onChange) {
+      props.onChange(value.toString("html"));
+    }
+  };
+  return (
+    <RichTextEditor
+      value={value}
+      onChange={onChange}
+      multiline
+      variant="filled"
+    />
   );
 };
