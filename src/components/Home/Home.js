@@ -27,6 +27,8 @@ import AddIcon from "@material-ui/icons/Add";
 import QuestionAnswerSharpIcon from "@material-ui/icons/QuestionAnswerSharp";
 import CustomTabs from "../CustomTabs/CustomTabs";
 import RichTextEditor from "react-rte";
+import Dropzone from "react-dropzone";
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 
 const Home = () => {
   const { data } = useContext(GlobalContext);
@@ -384,6 +386,30 @@ const CustomAccordion = ({ complete, question }) => {
   const [link, setLink] = useState("");
   const [image, setImage] = useState("");
 
+  const changeImageUrl = (file) => {
+    let reader = new FileReader();
+    // setUrl(e.target.files[0]);
+    reader.onloadend = () => {
+      if (reader.result) {
+        setImage(reader.result);
+      } else setImage("");
+    };
+    try {
+      reader.readAsDataURL(file);
+    } catch (error) {
+      setImage("");
+    }
+  };
+
+  const handleImage = (acceptedFile) => {
+    console.log({ acceptedFile });
+    changeImageUrl(acceptedFile[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Accordion className={styles.question}>
       <AccordionSummary
@@ -402,10 +428,11 @@ const CustomAccordion = ({ complete, question }) => {
         />
       </AccordionSummary>
       <AccordionDetails>
-        <div className={styles.detailsContainer}>
+        <form onSubmit={handleSubmit} className={styles.detailsContainer}>
           {question.answer ? question.answer : null}
           {textEditor && (
             <textarea
+              required
               value={text}
               onChange={(e) => setText(e.target.value)}
               className={styles.inputField}
@@ -413,51 +440,76 @@ const CustomAccordion = ({ complete, question }) => {
             />
           )}
           {imageEditor && (
-            <input
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className={styles.inputField}
-              placeholder="Enter Text"
-            />
+            <Dropzone
+              multiple={false}
+              onDrop={(acceptedFiles) => handleImage(acceptedFiles)}
+            >
+              {({ getRootProps, getInputProps }) => (
+                <section>
+                  <div {...getRootProps()}>
+                    <input
+                      {...getInputProps()}
+                      className={styles.dropzoneInput}
+                    />
+                    <div className={styles.dropzone}>
+                      <AddPhotoAlternateIcon />
+                      <p>Drag n drop image or click to pick one</p>
+                    </div>
+                  </div>
+                </section>
+              )}
+            </Dropzone>
           )}
           {linkEditor && (
             <input
+              required
               value={link}
               onChange={(e) => setLink(e.target.value)}
               className={styles.inputField}
               placeholder="Enter Link"
             />
           )}
-          <Grid container spacing={2}>
-            <Grid item md={4}>
-              <Button
-                onClick={() => setTextEditor(true)}
-                variant="outlined"
-                className={styles.addOptionBtn}
-              >
-                Text
-              </Button>
+          <div style={{ width: "100%", margin: "10px 0" }}>
+            <Grid container spacing={2}>
+              <Grid item md={4}>
+                <Button
+                  onClick={() => setTextEditor(!textEditor)}
+                  variant="outlined"
+                  className={styles.addOptionBtn}
+                >
+                  Text
+                </Button>
+              </Grid>
+              <Grid item md={4}>
+                <Button
+                  onClick={() => setImageEditor(!imageEditor)}
+                  variant="outlined"
+                  className={styles.addOptionBtn}
+                >
+                  Image
+                </Button>
+              </Grid>
+              <Grid item md={4}>
+                <Button
+                  onClick={() => setLinkEditor(!linkEditor)}
+                  variant="outlined"
+                  className={styles.addOptionBtn}
+                >
+                  Link
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item md={4}>
-              <Button
-                onClickk={() => setImageEditor(true)}
-                variant="outlined"
-                className={styles.addOptionBtn}
-              >
-                Image
-              </Button>
-            </Grid>
-            <Grid item md={4}>
-              <Button
-                onClick={() => setLinkEditor(true)}
-                variant="outlined"
-                className={styles.addOptionBtn}
-              >
-                Link
-              </Button>
-            </Grid>
-          </Grid>
-        </div>
+          </div>
+          <div className={styles.btnContainer}>
+            <Button
+              type="submit"
+              variant="contained"
+              className={styles.submitBtn}
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
       </AccordionDetails>
     </Accordion>
   );

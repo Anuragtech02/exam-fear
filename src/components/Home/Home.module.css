@@ -1,4 +1,4 @@
-.flexColumn, .container .leftContainer, .container .leftContainer .searchContainer, .container .leftContainer .searchContainer .title, .container .rightContainer, .container .cardContainer {
+.flexColumn, .container .leftContainer, .container .leftContainer .searchContainer, .container .leftContainer .searchContainer .title, .container .rightContainer, .container .cardContainer, .questionContainer .detailsContainer .dropzone {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -199,5 +199,47 @@
   color: var(--primaryDark);
   font-weight: 600;
   text-transform: capitalize;
+}
+
+.questionContainer .detailsContainer .dropzoneInput {
+  outline: none !important;
+  border: none !important;
+}
+
+.questionContainer .detailsContainer .dropzone {
+  min-height: 100px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.questionContainer .detailsContainer .inputField {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.questionContainer .detailsContainer .btnContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.questionContainer .detailsContainer .btnContainer .submitBtn {
+  background: var(--primaryDark) !important;
+  color: white;
+  margin: 10px 0;
+  margin-left: auto;
 }
 /*# sourceMappingURL=Home.module.css.map */
