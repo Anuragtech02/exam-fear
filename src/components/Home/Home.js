@@ -1,16 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "./Home.module.css";
 import {
-  CssBaseline,
-  Container,
-  Paper,
   Grid,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   FormControlLabel,
   Checkbox,
-  Typography,
   TextField,
   Card,
   Button,
@@ -23,15 +19,16 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { GlobalContext } from "../../Contexts/GlobalContext";
 import study from "../../Assets/study.webp";
-import AddIcon from "@material-ui/icons/Add";
 import QuestionAnswerSharpIcon from "@material-ui/icons/QuestionAnswerSharp";
 import CustomTabs from "../CustomTabs/CustomTabs";
 import RichTextEditor from "react-rte";
 import Dropzone from "react-dropzone";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import ViewAnswerModal from "../ViewAnswerModal/ViewAnswerModal";
+import ReactMarkdown from "react-markdown";
 
 const Home = () => {
-  const { data } = useContext(GlobalContext);
+  const { data, setNewData } = useContext(GlobalContext);
 
   const [subject, setSubject] = useState("Object Oriented Programming");
   const [subCode, setSubCode] = useState("CER3C2");
@@ -39,137 +36,7 @@ const Home = () => {
 
   const [questionParts, setQuestionParts] = useState([]);
 
-  const [questions, setQuestions] = useState([
-    {
-      complete: true,
-      parts: [
-        {
-          title:
-            "Differentiate among JDK, JRE and JVM. Why java is called platform independent?",
-          answer: "",
-          answerType: "text",
-          complete: true,
-        },
-        {
-          title:
-            "Define constructor? When do we need Constructor Overloading? What are private constructors and where are they used?",
-          answer: "",
-          answerType: "image",
-          complete: true,
-        },
-        {
-          title:
-            "Write a program to test the following method that returns digit number k of the positive integer n:",
-          answer: "",
-          answerType: "link",
-          complete: true,
-        },
-      ],
-    },
-    {
-      complete: true,
-      parts: [
-        {
-          title:
-            "Predict the outcome of the following program. Also justify your answer.",
-          answer: "",
-          answerType: "text",
-          complete: true,
-        },
-        {
-          title:
-            "Explain various control statements used in java with example.",
-          answer: "",
-          answerType: "image",
-          complete: true,
-        },
-        {
-          title:
-            "Write a program to test the following recursive method that returns the nth triangular number: static long t(int n)",
-          answer: "",
-          answerType: "link",
-          complete: true,
-        },
-      ],
-    },
-    {
-      complete: false,
-      parts: [
-        {
-          title:
-            "We can’t instantiate an abstract class. Then why constructors are allowed in abstract class? ",
-          answer: "",
-          answerType: "text",
-          complete: false,
-        },
-        {
-          title:
-            "Differentiate between interface and abstract class with example. Predict the outcome of the following program. Also justify your answer.",
-          answer: "",
-          answerType: "image",
-          complete: false,
-        },
-        {
-          title:
-            "How association, aggregation and composition are related to each other? Write a program to illustrate composition.",
-          answer: "",
-          answerType: "link",
-          complete: false,
-        },
-      ],
-    },
-    {
-      complete: true,
-      parts: [
-        {
-          title:
-            "Can we synchronize the run method? If yes then what will be the behaviour? ",
-          answer: "",
-          answerType: "text",
-          complete: true,
-        },
-        {
-          title:
-            "Write a program to illustrate the important methods in java for inter-thread communication?",
-          answer: "",
-          answerType: "image",
-          complete: true,
-        },
-        {
-          title: "Can we override start() method of thread class? Give reason.",
-          answer: "",
-          answerType: "link",
-          complete: true,
-        },
-      ],
-    },
-    {
-      complete: false,
-      parts: [
-        {
-          title:
-            "What is an applet? Explain various methods used during the life cycle of an applet.",
-          answer: "",
-          answerType: "text",
-          complete: false,
-        },
-        {
-          title:
-            "Describe hierarchy of I/O streams. Write a program to count the number of spaces, words and newlines in a text file.",
-          answer: "",
-          answerType: "image",
-          complete: false,
-        },
-        {
-          title:
-            "Explain Event Delegation model. Write a program to illustrate event handling for mouse.",
-          answer: "",
-          answerType: "link",
-          complete: true,
-        },
-      ],
-    },
-  ]);
+  const [questions, setQuestions] = useState([...data]);
   const [questBack, setQuestBack] = useState(questions);
   const [openAnswer, setOpenAnswer] = useState(false);
   // const [openAnswer, setOpenAnswer] = useState(false);
@@ -306,7 +173,7 @@ const CardComponent = ({ question, index }) => {
     <Card style={{ height: "100%" }}>
       <div className={styles.cardContainer}>
         <div className={styles.cardTitle}>
-          <h3 className={styles.qNo}>Q{index + 1}.</h3>
+          <h3 className={styles.qNo}>Q{question.id + 1}.</h3>
         </div>
         <div className={styles.parts}>
           <CustomTabs
@@ -316,25 +183,7 @@ const CardComponent = ({ question, index }) => {
             index={index}
             complete={question.complete}
           />
-          {/* <Grid container>
-            <Grid item md={4}>
-              <Button className={styles.part} variant="outlined">
-                Part A
-              </Button>
-            </Grid>
-            <Grid item md={4}>
-              <Button className={styles.part} variant="outlined">
-                Part B
-              </Button>
-            </Grid>
-            <Grid item md={4}>
-              <Button className={styles.part} variant="outlined">
-                Part C
-              </Button>
-            </Grid>
-          </Grid> */}
         </div>
-        <div></div>
       </div>
     </Card>
   );
@@ -357,7 +206,11 @@ const AddAnswerModal = ({ questions, open, handleClose }) => {
                 <h3>Question {i + 1}</h3>
                 {question.parts.map((part) => {
                   return (
-                    <CustomAccordion question={part} complete={part.complete} />
+                    <CustomAccordion
+                      question={part}
+                      questId={question.id}
+                      complete={part.complete}
+                    />
                   );
                 })}
               </div>
@@ -369,15 +222,12 @@ const AddAnswerModal = ({ questions, open, handleClose }) => {
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        {/* <Button onClick={handleClose} color="primary" autoFocus>
-        Agree
-      </Button> */}
       </DialogActions>
     </Dialog>
   );
 };
 
-const CustomAccordion = ({ complete, question }) => {
+const CustomAccordion = ({ complete, question, questId }) => {
   const [textEditor, setTextEditor] = useState(false);
   const [imageEditor, setImageEditor] = useState(false);
   const [linkEditor, setLinkEditor] = useState(false);
@@ -385,6 +235,8 @@ const CustomAccordion = ({ complete, question }) => {
   const [text, setText] = useState("");
   const [link, setLink] = useState("");
   const [image, setImage] = useState("");
+
+  const [markdown, setMarkdown] = useState("");
 
   const changeImageUrl = (file) => {
     let reader = new FileReader();
@@ -406,8 +258,26 @@ const CustomAccordion = ({ complete, question }) => {
     changeImageUrl(acceptedFile[0]);
   };
 
-  const handleSubmit = (e) => {
+  const [md, setMd] = useState(false);
+
+  const { setNewData } = useContext(GlobalContext);
+
+  const handleSubmit = (e, question) => {
     e.preventDefault();
+    let tempMark = "";
+    if (text && text.length) {
+      tempMark += text + "\n";
+    }
+    if (image && image.length) {
+      tempMark += `\n\n ![question-image](${image})`;
+    }
+    if (link && link.length) {
+      tempMark += `\n\n ${link}`;
+    }
+    console.log({ tempMark });
+    setMarkdown(tempMark);
+    setMd(true);
+    setNewData(question, markdown, questId);
   };
 
   return (
@@ -462,13 +332,13 @@ const CustomAccordion = ({ complete, question }) => {
           )}
           {linkEditor && (
             <input
-              required
               value={link}
               onChange={(e) => setLink(e.target.value)}
               className={styles.inputField}
               placeholder="Enter Link"
             />
           )}
+          {md && <ReactMarkdown>{markdown}</ReactMarkdown>}
           <div style={{ width: "100%", margin: "10px 0" }}>
             <Grid container spacing={2}>
               <Grid item md={4}>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "ViewAnswerModal.module.scss"
+    ],
+    "names": [],
+    "file": "ViewAnswerModal.module.css"
+}
