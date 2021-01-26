@@ -38,6 +38,10 @@
   fill: var(--primaryDark) !important;
 }
 
+.tabContainer .btnContainer .reportIcon {
+  fill: #faad14 !important;
+}
+
 .qContainer .qNo {
   padding: 5px 10px;
   margin-bottom: 5px;

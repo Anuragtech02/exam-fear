@@ -53,6 +53,15 @@
         .searchInput {
           margin: 0;
           width: 100% !important;
+          .inputElement {
+            // border-color: var(--primaryDark) !important;
+            // label {
+            //   color: var(--primaryDark) !important;
+            // }
+            // fieldset{
+
+            // }
+          }
         }
       }
     }
@@ -125,7 +134,7 @@
       }
     }
     .parts {
-      margin: 20px 0;
+      margin: 5px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;

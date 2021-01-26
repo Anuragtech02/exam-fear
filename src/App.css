@@ -4,6 +4,10 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+::selection {
+  color: #07521e;
+  background: #e0f8e7 !important;
+}
 :root {
   --primaryColor: #e0f8e7;
   --primaryDark: #07521e;
@@ -20,4 +24,11 @@
 .ant-tabs-nav .ant-tabs-tab-active div {
   color: var(--primaryDark) !important;
   font-weight: 600 !important;
+}
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primaryDark) !important;
+  color: var(--primaryDark) !important;
+}
+.Mui-focused {
+  color: var(--primaryDark) !important;
 }

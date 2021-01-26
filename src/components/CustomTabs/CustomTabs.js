@@ -4,15 +4,16 @@ import { Tabs } from "antd";
 import { Button } from "@material-ui/core";
 import styles from "./CustomTabs.module.css";
 import CheckIcon from "@material-ui/icons/Check";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 
 const { TabPane } = Tabs;
 
-const CustomTabs = ({ tab1, tab2, tab3, index }) => {
+const CustomTabs = ({ tab1, tab2, tab3, index, complete }) => {
   return (
     <Tabs
       type="card"
       tabPosition="bottom"
-      tabBarExtraContent={<QNo index={index} />}
+      //   tabBarExtraContent={<QNo index={index} />}
       style={{ width: "100%" }}
     >
       <TabPane tab="A" key="1">
@@ -24,7 +25,11 @@ const CustomTabs = ({ tab1, tab2, tab3, index }) => {
             <Button variant="outlined" className={styles.answerBtn}>
               View Answer
             </Button>
-            <CheckIcon />
+            {complete ? (
+              <CheckIcon />
+            ) : (
+              <ReportProblemIcon className={styles.reportIcon} />
+            )}{" "}
           </div>
         </div>
       </TabPane>
@@ -37,7 +42,11 @@ const CustomTabs = ({ tab1, tab2, tab3, index }) => {
             <Button variant="outlined" className={styles.answerBtn}>
               View Answer
             </Button>
-            <CheckIcon />
+            {complete ? (
+              <CheckIcon />
+            ) : (
+              <ReportProblemIcon className={styles.reportIcon} />
+            )}{" "}
           </div>
         </div>
       </TabPane>
@@ -50,7 +59,11 @@ const CustomTabs = ({ tab1, tab2, tab3, index }) => {
             <Button variant="outlined" className={styles.answerBtn}>
               View Answer
             </Button>
-            <CheckIcon />
+            {complete ? (
+              <CheckIcon />
+            ) : (
+              <ReportProblemIcon className={styles.reportIcon} />
+            )}
           </div>
         </div>
       </TabPane>

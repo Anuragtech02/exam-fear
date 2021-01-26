@@ -43,12 +43,14 @@ const Home = () => {
           answerType: "text",
         },
         {
-          title: "b",
+          title:
+            "Define constructor? When do we need Constructor Overloading? What are private constructors and where are they used?",
           answer: "",
           answerType: "image",
         },
         {
-          title: "c",
+          title:
+            "Write a program to test the following method that returns digit number k of the positive integer n:",
           answer: "",
           answerType: "link",
         },
@@ -59,17 +61,42 @@ const Home = () => {
       parts: [
         {
           title:
-            "Define constructor? When do we need Constructor Overloading? What are private constructors and where are they used?",
+            "Predict the outcome of the following program. Also justify your answer.",
           answer: "",
           answerType: "text",
         },
         {
-          title: "b",
+          title:
+            "Explain various control statements used in java with example.",
           answer: "",
           answerType: "image",
         },
         {
-          title: "c",
+          title:
+            "Write a program to test the following recursive method that returns the nth triangular number: static long t(int n)",
+          answer: "",
+          answerType: "link",
+        },
+      ],
+    },
+    {
+      complete: false,
+      parts: [
+        {
+          title:
+            "We can’t instantiate an abstract class. Then why constructors are allowed in abstract class? ",
+          answer: "",
+          answerType: "text",
+        },
+        {
+          title:
+            "Differentiate between interface and abstract class with example. Predict the outcome of the following program. Also justify your answer.",
+          answer: "",
+          answerType: "image",
+        },
+        {
+          title:
+            "How association, aggregation and composition are related to each other? Write a program to illustrate composition.",
           answer: "",
           answerType: "link",
         },
@@ -79,23 +106,49 @@ const Home = () => {
       complete: true,
       parts: [
         {
-          title: "This is a question",
+          title:
+            "Can we synchronize the run method? If yes then what will be the behaviour? ",
           answer: "",
           answerType: "text",
         },
         {
-          title: "b",
+          title:
+            "Write a program to illustrate the important methods in java for inter-thread communication?",
           answer: "",
           answerType: "image",
         },
         {
-          title: "c",
+          title: "Can we override start() method of thread class? Give reason.",
+          answer: "",
+          answerType: "link",
+        },
+      ],
+    },
+    {
+      complete: false,
+      parts: [
+        {
+          title:
+            "What is an applet? Explain various methods used during the life cycle of an applet.",
+          answer: "",
+          answerType: "text",
+        },
+        {
+          title:
+            "Describe hierarchy of I/O streams. Write a program to count the number of spaces, words and newlines in a text file.",
+          answer: "",
+          answerType: "image",
+        },
+        {
+          title:
+            "Explain Event Delegation model. Write a program to illustrate event handling for mouse.",
           answer: "",
           answerType: "link",
         },
       ],
     },
   ]);
+  const [questBack, setQuestBack] = useState(questions);
 
   useEffect(() => {
     let qParts = [];
@@ -106,15 +159,25 @@ const Home = () => {
     setQuestionParts(qParts);
   }, [questions]);
 
+  useEffect(() => {
+    setQuestBack(questions);
+  }, []);
+
   const onChangeSearch = (e, value) => {
-    // if (videos.indexOf(value) !== -1) {
-    //   const current = videos;
-    //   const newData = current.filter((vid) => vid.userid === value.userid);
-    //   // setVideoData(newData);
-    //   console.log(newData);
-    // } else {
-    //   // setVideoData(videosLimited);
-    // }
+    if (questionParts.indexOf(value) !== -1) {
+      const current = questions;
+      const newData = current.filter(
+        (item) =>
+          item.parts.findIndex(
+            (innerItem) => innerItem.title === value.title
+          ) !== -1
+      );
+      setQuestions(newData);
+      console.log(newData);
+    } else {
+      setQuestions(questBack);
+    }
+    console.log(value);
   };
 
   return (
@@ -147,7 +210,12 @@ const Home = () => {
                   getOptionLabel={(option) => option.title}
                   style={{ width: 300 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Search" variant="outlined" />
+                    <TextField
+                      className={styles.inputElement}
+                      {...params}
+                      label="Search"
+                      variant="outlined"
+                    />
                   )}
                 />
               </div>
@@ -201,12 +269,16 @@ const CardComponent = ({ question, index }) => {
   return (
     <Card style={{ height: "100%" }}>
       <div className={styles.cardContainer}>
+        <div className={styles.cardTitle}>
+          <h3 className={styles.qNo}>Q{index + 1}.</h3>
+        </div>
         <div className={styles.parts}>
           <CustomTabs
             tab1={question.parts[0]}
             tab2={question.parts[1]}
             tab3={question.parts[2]}
             index={index}
+            complete={question.complete}
           />
           {/* <Grid container>
             <Grid item md={4}>
