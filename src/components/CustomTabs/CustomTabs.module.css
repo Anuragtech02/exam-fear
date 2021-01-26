@@ -1,0 +1,53 @@
+.tabContainer .cardTitle h3 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
+  margin-top: 10px;
+}
+
+.tabContainer .btnContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.tabContainer .btnContainer .answerBtn {
+  outline: none !important;
+  border-color: #7cc491 !important;
+  color: var(--primaryDark);
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.tabContainer .btnContainer svg {
+  fill: var(--primaryDark) !important;
+}
+
+.qContainer .qNo {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  background: var(--primaryColor);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 0.9rem;
+  font-weight: 600;
+  -webkit-box-shadow: -2px -2px 0 var(--primaryDark);
+          box-shadow: -2px -2px 0 var(--primaryDark);
+}
+/*# sourceMappingURL=CustomTabs.module.css.map */

@@ -1,0 +1,46 @@
+.tabContainer {
+  .cardTitle {
+    h3 {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* number of lines to show */
+      -webkit-box-orient: vertical;
+      margin-top: 10px;
+    }
+  }
+  .btnContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    .answerBtn {
+      outline: none !important;
+      border-color: #7cc491 !important;
+      color: var(--primaryDark);
+      text-transform: capitalize;
+      font-weight: 600;
+    }
+    svg {
+      fill: var(--primaryDark) !important;
+    }
+  }
+}
+
+.qContainer {
+  .qNo {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    background: var(--primaryColor);
+    width: fit-content;
+    // border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: -2px -2px 0 var(--primaryDark);
+  }
+}

@@ -1,0 +1,185 @@
+.flexColumn, .container .leftContainer, .container .leftContainer .searchContainer, .container .leftContainer .searchContainer .title, .container .rightContainer, .container .cardContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  min-height: 100vh;
+  padding: 50px 0;
+  max-width: 70vw;
+}
+
+.container .detailsContainer {
+  min-width: 50vw;
+}
+
+.container .leftContainer {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 100%;
+}
+
+.container .leftContainer .searchContainer {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container .leftContainer .searchContainer .title h3 {
+  font-size: 3rem !important;
+  color: var(--primaryDark);
+  font-family: "Playfair Display", serif !important;
+  font-weight: 700;
+  margin: 0;
+}
+
+.container .leftContainer .searchContainer .title p {
+  margin: 0;
+  margin-top: 30px !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+  width: 80%;
+  font-size: 1rem;
+  line-height: 1.5rem !important;
+}
+
+.container .leftContainer .searchContainer .searchBarContainer {
+  margin: 15px 0;
+  width: 90%;
+}
+
+.container .leftContainer .searchContainer .searchBarContainer .searchInput {
+  margin: 0;
+  width: 100% !important;
+}
+
+.container .rightContainer {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.container .rightContainer img {
+  max-width: 80%;
+}
+
+.container .addAnswerBtn {
+  height: 100% !important;
+  width: 100% !important;
+  background: var(--primaryColor) !important;
+  font-weight: 800;
+  color: var(--primaryDark);
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}
+
+.container .help {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.container .help .helpItem {
+  margin-left: 40px;
+}
+
+.container .help .helpItem:first-child {
+  margin: 0;
+}
+
+.container .help .helpItem h5 {
+  font-weight: 400 !important;
+  margin: 5px 0 !important;
+  color: rgba(0, 0, 0, 0.5) !important;
+  font-size: 0.8rem;
+}
+
+.container .help .helpItem h4 {
+  font-weight: 600 !important;
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.container .cardContainer {
+  width: 100%;
+  padding: 10px 20px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+}
+
+.container .cardContainer .cardTitle h3 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* number of lines to show */
+  -webkit-box-orient: vertical;
+  margin-top: 10px;
+}
+
+.container .cardContainer .cardTitle .qNo {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  background: var(--primaryColor);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-box-shadow: -5px -5px 0 var(--primaryDark);
+          box-shadow: -5px -5px 0 var(--primaryDark);
+}
+
+.container .cardContainer .parts {
+  margin: 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.muiContainer {
+  min-width: 60vh !important;
+}
+/*# sourceMappingURL=Home.module.css.map */
