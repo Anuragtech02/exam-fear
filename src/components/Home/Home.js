@@ -36,23 +36,31 @@ const Home = () => {
 
   const [questionParts, setQuestionParts] = useState([]);
 
-  const [questions, setQuestions] = useState([...data]);
-  const [questBack, setQuestBack] = useState(questions);
+  const [questions, setQuestions] = useState([]);
+  // const [questBack, setQuestBack] = useState(questions);
   const [openAnswer, setOpenAnswer] = useState(false);
   // const [openAnswer, setOpenAnswer] = useState(false);
+  const [viewAnswerModal, setViewAnswerModal] = useState(false);
+  const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
     let qParts = [];
-    questBack.forEach((item) => {
+    data.forEach((item) => {
       qParts.push(...item.parts);
     });
     console.log(qParts);
     setQuestionParts(qParts);
-  }, [questBack]);
+    setQuestions(data);
+  }, [data]);
 
   useEffect(() => {
-    setQuestBack(questions);
-  }, []);
+    console.log(data);
+  }, [data]);
+
+  // useEffect(() => {
+  //   setQuestions(data);
+  //   // setQuestBack(data);
+  // }, [data]);
 
   const onChangeSearch = (e, value) => {
     if (questionParts.indexOf(value) !== -1) {
@@ -66,7 +74,7 @@ const Home = () => {
       setQuestions(newData);
       console.log(newData);
     } else {
-      setQuestions(questBack);
+      setQuestions(data);
     }
     console.log(value);
   };
@@ -160,8 +168,13 @@ const Home = () => {
       <AddAnswerModal
         open={openAnswer}
         handleClose={handleCloseAnswer}
-        questions={questBack}
+        questions={data}
       />
+      {/* <ViewAnswerModal
+        open={viewAnswerModal}
+        handleClose={() => setViewAnswerModal(false)}
+        markdown={markdown}
+      /> */}
     </div>
   );
 };
@@ -262,9 +275,9 @@ const CustomAccordion = ({ complete, question, questId }) => {
 
   const { setNewData } = useContext(GlobalContext);
 
-  const handleSubmit = (e, question) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let tempMark = "";
+    let tempMark = question.answer + "\n\n";
     if (text && text.length) {
       tempMark += text + "\n";
     }
@@ -277,7 +290,10 @@ const CustomAccordion = ({ complete, question, questId }) => {
     console.log({ tempMark });
     setMarkdown(tempMark);
     setMd(true);
-    setNewData(question, markdown, questId);
+    setNewData(question, tempMark, questId);
+    setText("");
+    setImage("");
+    setLink("");
   };
 
   return (
@@ -299,7 +315,12 @@ const CustomAccordion = ({ complete, question, questId }) => {
       </AccordionSummary>
       <AccordionDetails>
         <form onSubmit={handleSubmit} className={styles.detailsContainer}>
-          {question.answer ? question.answer : null}
+          {question.answer ? (
+            <div className={styles.mdContainer}>
+              <ReactMarkdown>{question.answer}</ReactMarkdown>
+            </div>
+          ) : null}
+
           {textEditor && (
             <textarea
               required
@@ -338,7 +359,7 @@ const CustomAccordion = ({ complete, question, questId }) => {
               placeholder="Enter Link"
             />
           )}
-          {md && <ReactMarkdown>{markdown}</ReactMarkdown>}
+          {/* {md && <ReactMarkdown>{markdown}</ReactMarkdown>} */}
           <div style={{ width: "100%", margin: "10px 0" }}>
             <Grid container spacing={2}>
               <Grid item md={4}>

@@ -141,16 +141,30 @@ const GlobalContextProvider = ({ children }) => {
   ]);
 
   const setNewData = (question, markdown, questId) => {
-    if (question && markdown && questId) {
+    console.log("Enteredd", { question, markdown, questId });
+    if (question && questId !== -1) {
       const index = data[questId].parts.findIndex(
         (item) => item.title === question.title
       );
       let tempData = { ...data[questId].parts[index] };
+      let tempParts = [...data[questId].parts];
+      console.log(tempData);
       if (tempData) {
-        tempData = { ...tempData, answer: markdown };
+        tempData.answer = markdown;
+        tempParts[index] = tempData;
+        // setData(tempData);
+        let newData = [...data];
+        newData[questId] = { ...newData[questId], parts: tempParts };
+        console.log({ newData });
+        setData(newData);
       }
+      console.log({ tempData });
     }
   };
+
+  React.useEffect(() => {
+    console.log({ data });
+  }, [data]);
 
   return (
     <GlobalContext.Provider value={{ data, setNewData }}>

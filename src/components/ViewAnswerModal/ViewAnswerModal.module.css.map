@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AACE,UADQ,CACR,GAAG,CAAC;EACF,SAAS,EAAE,IAAI;CAChB",
     "sources": [
         "ViewAnswerModal.module.scss"
     ],
