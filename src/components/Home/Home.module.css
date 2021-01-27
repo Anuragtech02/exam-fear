@@ -99,6 +99,7 @@
   margin: 5px 0 !important;
   color: rgba(0, 0, 0, 0.5) !important;
   font-size: 0.8rem;
+  text-transform: uppercase;
 }
 
 .container .helpItem h4 {
@@ -106,6 +107,7 @@
   color: rgba(0, 0, 0, 0.7) !important;
   font-size: 0.9rem;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .container .cardContainer {
