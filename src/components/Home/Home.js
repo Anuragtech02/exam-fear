@@ -2,11 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import styles from "./Home.module.css";
 import {
   Grid,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  FormControlLabel,
-  Checkbox,
   TextField,
   Card,
   Button,
@@ -21,11 +16,8 @@ import { GlobalContext } from "../../Contexts/GlobalContext";
 import study from "../../Assets/study.webp";
 import QuestionAnswerSharpIcon from "@material-ui/icons/QuestionAnswerSharp";
 import CustomTabs from "../CustomTabs/CustomTabs";
-import RichTextEditor from "react-rte";
-import Dropzone from "react-dropzone";
-import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import ViewAnswerModal from "../ViewAnswerModal/ViewAnswerModal";
-import ReactMarkdown from "react-markdown";
+import CustomAccordion from "../CustomAccordion/CustomAccordion";
 
 const Home = () => {
   const { data, setNewData } = useContext(GlobalContext);
@@ -237,189 +229,5 @@ const AddAnswerModal = ({ questions, open, handleClose }) => {
         </Button>
       </DialogActions>
     </Dialog>
-  );
-};
-
-const CustomAccordion = ({ complete, question, questId }) => {
-  const [textEditor, setTextEditor] = useState(false);
-  const [imageEditor, setImageEditor] = useState(false);
-  const [linkEditor, setLinkEditor] = useState(false);
-
-  const [text, setText] = useState("");
-  const [link, setLink] = useState("");
-  const [image, setImage] = useState("");
-
-  const [markdown, setMarkdown] = useState("");
-
-  const changeImageUrl = (file) => {
-    let reader = new FileReader();
-    // setUrl(e.target.files[0]);
-    reader.onloadend = () => {
-      if (reader.result) {
-        setImage(reader.result);
-      } else setImage("");
-    };
-    try {
-      reader.readAsDataURL(file);
-    } catch (error) {
-      setImage("");
-    }
-  };
-
-  const handleImage = (acceptedFile) => {
-    console.log({ acceptedFile });
-    changeImageUrl(acceptedFile[0]);
-  };
-
-  const [md, setMd] = useState(false);
-
-  const { setNewData } = useContext(GlobalContext);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let tempMark = question.answer + "\n\n";
-    if (text && text.length) {
-      tempMark += text + "\n";
-    }
-    if (image && image.length) {
-      tempMark += `\n\n ![question-image](${image})`;
-    }
-    if (link && link.length) {
-      tempMark += `\n\n ${link}`;
-    }
-    console.log({ tempMark });
-    setMarkdown(tempMark);
-    setMd(true);
-    setNewData(question, tempMark, questId);
-    setText("");
-    setImage("");
-    setLink("");
-  };
-
-  return (
-    <Accordion className={styles.question}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-label="Expand"
-        aria-controls="additional-actions3-content"
-        id="additional-actions3-header"
-      >
-        <FormControlLabel
-          aria-label="Acknowledge"
-          onClick={(event) => event.stopPropagation()}
-          onFocus={(event) => event.stopPropagation()}
-          control={<Checkbox />}
-          checked={complete}
-          label={question.title}
-        />
-      </AccordionSummary>
-      <AccordionDetails>
-        <form onSubmit={handleSubmit} className={styles.detailsContainer}>
-          {question.answer ? (
-            <div className={styles.mdContainer}>
-              <ReactMarkdown>{question.answer}</ReactMarkdown>
-            </div>
-          ) : null}
-
-          {textEditor && (
-            <textarea
-              required
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className={styles.inputField}
-              placeholder="Enter Text"
-            />
-          )}
-          {imageEditor && (
-            <Dropzone
-              multiple={false}
-              onDrop={(acceptedFiles) => handleImage(acceptedFiles)}
-            >
-              {({ getRootProps, getInputProps }) => (
-                <section>
-                  <div {...getRootProps()}>
-                    <input
-                      {...getInputProps()}
-                      className={styles.dropzoneInput}
-                    />
-                    <div className={styles.dropzone}>
-                      <AddPhotoAlternateIcon />
-                      <p>Drag n drop image or click to pick one</p>
-                    </div>
-                  </div>
-                </section>
-              )}
-            </Dropzone>
-          )}
-          {linkEditor && (
-            <input
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-              className={styles.inputField}
-              placeholder="Enter Link"
-            />
-          )}
-          {/* {md && <ReactMarkdown>{markdown}</ReactMarkdown>} */}
-          <div style={{ width: "100%", margin: "10px 0" }}>
-            <Grid container spacing={2}>
-              <Grid item md={4}>
-                <Button
-                  onClick={() => setTextEditor(!textEditor)}
-                  variant="outlined"
-                  className={styles.addOptionBtn}
-                >
-                  Text
-                </Button>
-              </Grid>
-              <Grid item md={4}>
-                <Button
-                  onClick={() => setImageEditor(!imageEditor)}
-                  variant="outlined"
-                  className={styles.addOptionBtn}
-                >
-                  Image
-                </Button>
-              </Grid>
-              <Grid item md={4}>
-                <Button
-                  onClick={() => setLinkEditor(!linkEditor)}
-                  variant="outlined"
-                  className={styles.addOptionBtn}
-                >
-                  Link
-                </Button>
-              </Grid>
-            </Grid>
-          </div>
-          <div className={styles.btnContainer}>
-            <Button
-              type="submit"
-              variant="contained"
-              className={styles.submitBtn}
-            >
-              Submit
-            </Button>
-          </div>
-        </form>
-      </AccordionDetails>
-    </Accordion>
-  );
-};
-
-const CustomEditor = (props) => {
-  const [value, setValue] = useState(RichTextEditor.createEmptyValue());
-  const onChange = (value) => {
-    setValue(value);
-    if (props.onChange) {
-      props.onChange(value.toString("html"));
-    }
-  };
-  return (
-    <RichTextEditor
-      value={value}
-      onChange={onChange}
-      multiline
-      variant="filled"
-    />
   );
 };

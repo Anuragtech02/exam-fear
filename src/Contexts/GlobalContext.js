@@ -6,55 +6,55 @@ const GlobalContextProvider = ({ children }) => {
   const [data, setData] = useState([
     {
       id: 0,
-      complete: true,
+      complete: false,
       parts: [
         {
           title:
             "Differentiate among JDK, JRE and JVM. Why java is called platform independent?",
           answer: "",
           answerType: "text",
-          complete: true,
+          complete: false,
         },
         {
           title:
             "Define constructor? When do we need Constructor Overloading? What are private constructors and where are they used?",
           answer: "",
           answerType: "image",
-          complete: true,
+          complete: false,
         },
         {
           title:
             "Write a program to test the following method that returns digit number k of the positive integer n:",
           answer: "",
           answerType: "link",
-          complete: true,
+          complete: false,
         },
       ],
     },
     {
       id: 1,
-      complete: true,
+      complete: false,
       parts: [
         {
           title:
             "Predict the outcome of the following program. Also justify your answer.",
           answer: "",
           answerType: "text",
-          complete: true,
+          complete: false,
         },
         {
           title:
             "Explain various control statements used in java with example.",
           answer: "",
           answerType: "image",
-          complete: true,
+          complete: false,
         },
         {
           title:
             "Write a program to test the following recursive method that returns the nth triangular number: static long t(int n)",
           answer: "",
           answerType: "link",
-          complete: true,
+          complete: false,
         },
       ],
     },
@@ -87,27 +87,27 @@ const GlobalContextProvider = ({ children }) => {
     },
     {
       id: 3,
-      complete: true,
+      complete: false,
       parts: [
         {
           title:
             "Can we synchronize the run method? If yes then what will be the behaviour? ",
           answer: "",
           answerType: "text",
-          complete: true,
+          complete: false,
         },
         {
           title:
             "Write a program to illustrate the important methods in java for inter-thread communication?",
           answer: "",
           answerType: "image",
-          complete: true,
+          complete: false,
         },
         {
           title: "Can we override start() method of thread class? Give reason.",
           answer: "",
           answerType: "link",
-          complete: true,
+          complete: false,
         },
       ],
     },
@@ -134,7 +134,7 @@ const GlobalContextProvider = ({ children }) => {
             "Explain Event Delegation model. Write a program to illustrate event handling for mouse.",
           answer: "",
           answerType: "link",
-          complete: true,
+          complete: false,
         },
       ],
     },
@@ -151,6 +151,7 @@ const GlobalContextProvider = ({ children }) => {
       console.log(tempData);
       if (tempData) {
         tempData.answer = markdown;
+        tempData.complete = true;
         tempParts[index] = tempData;
         // setData(tempData);
         let newData = [...data];
