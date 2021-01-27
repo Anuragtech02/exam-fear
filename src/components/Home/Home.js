@@ -137,19 +137,19 @@ const Home = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2}>
-        <Grid item md={3} sm={4} xs={6}>
+        <Grid item lg={3} md={3} sm={4} xs={6}>
           <div className={styles.helpItem}>
             <h5>Subject Name</h5>
             <h4>{subject}</h4>
           </div>
         </Grid>
-        <Grid item md={3} sm={4} xs={6}>
+        <Grid item lg={2} md={3} sm={4} xs={6}>
           <div className={styles.helpItem}>
             <h5>Subject Code</h5>
             <h4>{subCode}</h4>
           </div>
         </Grid>
-        <Grid item md={3} sm={4} xs={6}>
+        <Grid item lg={3} md={3} sm={4} xs={6}>
           <div className={styles.helpItem}>
             <h5>Roll No.</h5>
             <h4>{rno}</h4>
