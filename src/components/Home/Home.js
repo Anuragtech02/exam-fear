@@ -188,7 +188,7 @@ const Home = ({ history }) => {
       <div className={styles.contentQuestion}>
         <Grid container spacing={2}>
           <Grid item xl={3} lg={4} md={4} sm={6} xs={12}>
-            <Card style={{ height: "100%" }}>
+            <Card style={{ height: "100%", width: "100%" }}>
               <Button
                 onClick={() => setOpenAnswer(true)}
                 className={styles.addAnswerBtn}
@@ -271,6 +271,7 @@ const AddAnswerModal = ({ questions, open, handleClose }) => {
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      fullWidth
     >
       <DialogTitle id="alert-dialog-title">{"Add Answer"}</DialogTitle>
       <DialogContent>

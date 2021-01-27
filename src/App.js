@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import GlobalContextProvider from "./Contexts/GlobalContext";
 import {
   BrowserRouter as Router,
@@ -142,6 +142,20 @@ const EnterDetails = () => {
   const [loading, setLoading] = useState(false);
 
   const { year, branch } = useParams();
+
+  useEffect(() => {
+    const check = async () => {
+      const db = firebase.database();
+      const dbRef = db.ref(`${year}/${branch}`);
+      const status = (await dbRef.once("value")).exists();
+      if (status) {
+        const a = document.createElement("a");
+        a.href = `/${year}/${branch}`;
+        a.click();
+      }
+    };
+    check();
+  }, [year, branch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
