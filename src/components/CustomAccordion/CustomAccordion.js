@@ -10,11 +10,14 @@ import {
   FormControlLabel,
   Checkbox,
   Button,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styles from "./CustomAccordion.module.css";
 import imageCompression from "browser-image-compression";
 import ReactMarkdown from "react-markdown";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const CustomAccordion = ({ complete, question, questId }) => {
   const [textEditor, setTextEditor] = useState(false);
@@ -86,11 +89,11 @@ const CustomAccordion = ({ complete, question, questId }) => {
 
   const [md, setMd] = useState(false);
 
-  const { setNewData } = useContext(GlobalContext);
+  const { setNewData, deleteAnswer } = useContext(GlobalContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let tempMark = question.answer + "\n\n";
+    let tempMark = question.answer;
     if (text && text.length) {
       tempMark += "\n\n" + text;
     }
@@ -100,6 +103,10 @@ const CustomAccordion = ({ complete, question, questId }) => {
     if (link && link.length) {
       tempMark += `\n\n [${link}](${link})`;
     }
+    if (imageEditor && !image && !image.length) {
+      alert("Please select an image to upload");
+      return;
+    }
     console.log({ tempMark });
     setMarkdown(tempMark);
     setMd(true);
@@ -108,6 +115,11 @@ const CustomAccordion = ({ complete, question, questId }) => {
     setImage("");
     setLink("");
     setImageFile(null);
+  };
+
+  const handleClickDelete = () => {
+    //Delete answer from globalContext
+    deleteAnswer(question, questId);
   };
 
   return (
@@ -129,11 +141,22 @@ const CustomAccordion = ({ complete, question, questId }) => {
       </AccordionSummary>
       <AccordionDetails>
         <form onSubmit={handleSubmit} className={styles.detailsContainer}>
-          {question.answer ? (
-            <div className={styles.mdContainer}>
-              <ReactMarkdown>{question.answer}</ReactMarkdown>
-            </div>
-          ) : null}
+          <div className={styles.prevAnswer}>
+            {question.answer ? (
+              <div className={styles.mdContainer}>
+                <ReactMarkdown>{question.answer}</ReactMarkdown>
+              </div>
+            ) : null}
+            {question.answer && (
+              <div className={styles.delIcon}>
+                <Tooltip placement="top" title="Delete Answer">
+                  <IconButton onClick={handleClickDelete}>
+                    <DeleteIcon fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              </div>
+            )}
+          </div>
 
           {textEditor && (
             <textarea
@@ -172,6 +195,7 @@ const CustomAccordion = ({ complete, question, questId }) => {
           )}
           {linkEditor && (
             <input
+              required
               value={link}
               onChange={(e) => setLink(e.target.value)}
               className={styles.inputField}

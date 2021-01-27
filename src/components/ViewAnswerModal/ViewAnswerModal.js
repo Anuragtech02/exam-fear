@@ -20,7 +20,11 @@ const ViewAnswerModal = ({ markdown, open, handleClose }) => {
       <DialogTitle id="alert-dialog-title">{"Answer"}</DialogTitle>
       <DialogContent>
         <div className={styles.container}>
-          <ReactMarkdown>{markdown}</ReactMarkdown>
+          {markdown ? (
+            <ReactMarkdown>{markdown}</ReactMarkdown>
+          ) : (
+            <p>Not answered yet</p>
+          )}
         </div>
       </DialogContent>
       <DialogActions>

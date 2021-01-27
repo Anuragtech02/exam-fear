@@ -10,7 +10,7 @@ const App = () => {
       <GlobalContextProvider>
         <Router>
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route path="/:year/:branch" exact component={Home} />
           </Switch>
         </Router>
       </GlobalContextProvider>

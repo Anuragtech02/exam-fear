@@ -1,0 +1,148 @@
+{
+    "year-2": {
+        "cse" : {
+            "branch": "CSE",
+            "subject": "Object Oriented Programming",
+            "subCode": "CER3C2",
+            "rno": "19C3XXX",
+            "year": 2,
+            "questions": [
+            {
+                "id": 0,
+                "complete": false,
+                "parts": [
+                {
+                    "title":
+                    "Differentiate among JDK, JRE and JVM. Why java is called platform independent?",
+                    "answer": "",
+                
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Define constructor? When do we need Constructor Overloading? What are private constructors and where are they used?",
+                    "answer": "",
+                    
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Write a program to test the following method that returns digit number k of the positive integer n:",
+                    "answer": "",
+                
+                    "complete": false
+                }
+                ]
+            },
+            {
+                "id": 1,
+                "complete": false,
+                "parts": [
+                {
+                    "title":
+                    "Predict the outcome of the following program. Also justify your answer.",
+                    "answer": "",
+                
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Explain various control statements used in java with example.",
+                    "answer": "",
+                    
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Write a program to test the following recursive method that returns the nth triangular number: static long t(int n)",
+                    "answer": "",
+                
+                    "complete": false
+                }
+                ]
+            },
+            {
+                "id": 2,
+                "complete": false,
+                "parts": [
+                {
+                    "title":
+                    "We can’t instantiate an abstract class. Then why constructors are allowed in abstract class? ",
+                    "answer": "",
+                
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Differentiate between interface and abstract class with example. Predict the outcome of the following program. Also justify your answer.",
+                    "answer": "",
+                    
+                    "complete": false
+                },
+                {
+                    "title":
+                    "How association, aggregation and composition are related to each other? Write a program to illustrate composition.",
+                    "answer": "",
+                
+                    "complete": false
+                }
+                ]
+            },
+            {
+                "id": 3,
+                "complete": false,
+                "parts": [
+                {
+                    "title":
+                    "Can we synchronize the run method? If yes then what will be the behaviour? ",
+                    "answer": "",
+                
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Write a program to illustrate the important methods in java for inter-thread communication?",
+                    "answer": "",
+                    
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Can we override start() method of thread class? Give reason.",
+                    "answer": "",
+                
+                    "complete": false
+                }
+                ]
+            },
+            {
+                "id": 4,
+                "complete": false,
+                "parts": [
+                {
+                    "title":
+                    "What is an applet? Explain various methods used during the life cycle of an applet.",
+                    "answer": "",
+                
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Describe hierarchy of I/O streams. Write a program to count the number of spaces, words and newlines in a text file.",
+                    "answer": "",
+                    
+                    "complete": false
+                },
+                {
+                    "title":
+                    "Explain Event Delegation model. Write a program to illustrate event handling for mouse.",
+                    "answer": "",
+                
+                    "complete": false
+                }
+                ]
+            }
+            ]
+      }
+    }
+}

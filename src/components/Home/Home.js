@@ -18,13 +18,18 @@ import QuestionAnswerSharpIcon from "@material-ui/icons/QuestionAnswerSharp";
 import CustomTabs from "../CustomTabs/CustomTabs";
 import ViewAnswerModal from "../ViewAnswerModal/ViewAnswerModal";
 import CustomAccordion from "../CustomAccordion/CustomAccordion";
+import { useParams, withRouter } from "react-router";
 
 const Home = () => {
-  const { data, setNewData } = useContext(GlobalContext);
+  const { data, rno, subject, subCode, setYear, setBranch } = useContext(
+    GlobalContext
+  );
 
-  const [subject, setSubject] = useState("Object Oriented Programming");
-  const [subCode, setSubCode] = useState("CER3C2");
-  const rno = "19C3xxx";
+  // const [subject, setSubject] = useState("Object Oriented Programming");
+  // const [subCode, setSubCode] = useState("CER3C2");
+  // const rno = "19C3xxx";
+
+  const { branch, year } = useParams();
 
   const [questionParts, setQuestionParts] = useState([]);
 
@@ -36,17 +41,25 @@ const Home = () => {
   const [markdown, setMarkdown] = useState("");
 
   useEffect(() => {
+    setBranch(branch);
+    setYear(year);
+  }, [branch, year, setBranch, setYear]);
+
+  useEffect(() => {
     let qParts = [];
-    data.forEach((item) => {
-      qParts.push(...item.parts);
-    });
-    console.log(qParts);
-    setQuestionParts(qParts);
-    setQuestions(data);
+    if (data && data.length) {
+      data.forEach((item) => {
+        qParts.push(...item.parts);
+      });
+      // console.log(qParts);
+      setQuestionParts(qParts);
+      setQuestions(data);
+    }
   }, [data]);
 
   useEffect(() => {
     console.log(data);
+    console.log("Changed");
   }, [data]);
 
   // useEffect(() => {
@@ -149,18 +162,37 @@ const Home = () => {
             </Button>
           </Card>
         </Grid>
-        {questions.map((item, i) => {
-          return (
-            <Grid key={item.title + i} item xl={3} lg={4} md={4} sm={6} xs={12}>
-              <CardComponent question={item} index={i} />
-            </Grid>
-          );
-        })}
+        {questions ? (
+          questions.map((item, i) => {
+            return (
+              <Grid
+                key={"question-paper" + i}
+                item
+                xl={3}
+                lg={4}
+                md={4}
+                sm={6}
+                xs={12}
+              >
+                <CardComponent question={item} index={i} />
+              </Grid>
+            );
+          })
+        ) : (
+          <Grid item>
+            <div>
+              <p>
+                Seems like your questions have not been added yet, Please
+                contact admin
+              </p>
+            </div>
+          </Grid>
+        )}
       </Grid>
       <AddAnswerModal
         open={openAnswer}
         handleClose={handleCloseAnswer}
-        questions={data}
+        questions={questions}
       />
       {/* <ViewAnswerModal
         open={viewAnswerModal}
@@ -171,7 +203,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withRouter(Home);
 
 const CardComponent = ({ question, index }) => {
   return (
@@ -205,22 +237,27 @@ const AddAnswerModal = ({ questions, open, handleClose }) => {
       <DialogTitle id="alert-dialog-title">{"Add Answer"}</DialogTitle>
       <DialogContent>
         <div className={styles.dialogContent}>
-          {questions.map((question, i) => {
-            return (
-              <div key={"question" + i} className={styles.questionContainer}>
-                <h3>Question {i + 1}</h3>
-                {question.parts.map((part) => {
-                  return (
-                    <CustomAccordion
-                      question={part}
-                      questId={question.id}
-                      complete={part.complete}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
+          {questions &&
+            questions.map((question, i) => {
+              return (
+                <div
+                  key={"question-answer" + i}
+                  className={styles.questionContainer}
+                >
+                  <h3>Question {i + 1}</h3>
+                  {question.parts.map((part, index) => {
+                    return (
+                      <CustomAccordion
+                        key={part.title}
+                        question={part}
+                        questId={question.id}
+                        complete={part.complete}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
         </div>
       </DialogContent>
       <DialogActions>
