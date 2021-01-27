@@ -136,7 +136,27 @@ const Home = () => {
           </div>
         </Grid>
       </Grid>
-      <div className={styles.help}>
+      <Grid container spacing={2}>
+        <Grid item md={3} sm={4} xs={6}>
+          <div className={styles.helpItem}>
+            <h5>Subject Name</h5>
+            <h4>{subject}</h4>
+          </div>
+        </Grid>
+        <Grid item md={3} sm={4} xs={6}>
+          <div className={styles.helpItem}>
+            <h5>Subject Code</h5>
+            <h4>{subCode}</h4>
+          </div>
+        </Grid>
+        <Grid item md={3} sm={4} xs={6}>
+          <div className={styles.helpItem}>
+            <h5>Roll No.</h5>
+            <h4>{rno}</h4>
+          </div>
+        </Grid>
+      </Grid>
+      {/* <div className={styles.help}>
         <div className={styles.helpItem}>
           <h5>Subject Name</h5>
           <h4>{subject}</h4>
@@ -149,46 +169,49 @@ const Home = () => {
           <h5>Roll No.</h5>
           <h4>{rno}</h4>
         </div>
-      </div>
-      <Grid container spacing={2} style={{ margin: "20px 0" }}>
-        <Grid item xl={3} lg={4} md={4} sm={6} xs={12}>
-          <Card style={{ height: "100%" }}>
-            <Button
-              onClick={() => setOpenAnswer(true)}
-              className={styles.addAnswerBtn}
-            >
-              <QuestionAnswerSharpIcon />
-              &nbsp; Add Answer
-            </Button>
-          </Card>
-        </Grid>
-        {questions ? (
-          questions.map((item, i) => {
-            return (
-              <Grid
-                key={"question-paper" + i}
-                item
-                xl={3}
-                lg={4}
-                md={4}
-                sm={6}
-                xs={12}
+      </div> */}
+      <div className={styles.contentQuestion}>
+        <Grid container spacing={2}>
+          <Grid item xl={3} lg={4} md={4} sm={6} xs={12}>
+            <Card style={{ height: "100%" }}>
+              <Button
+                onClick={() => setOpenAnswer(true)}
+                className={styles.addAnswerBtn}
               >
-                <CardComponent question={item} index={i} />
-              </Grid>
-            );
-          })
-        ) : (
-          <Grid item>
-            <div>
-              <p>
-                Seems like your questions have not been added yet, Please
-                contact admin
-              </p>
-            </div>
+                <QuestionAnswerSharpIcon />
+                &nbsp; Add Answer
+              </Button>
+            </Card>
           </Grid>
-        )}
-      </Grid>
+          {questions ? (
+            questions.map((item, i) => {
+              return (
+                <Grid
+                  key={"question-paper" + i}
+                  item
+                  xl={3}
+                  lg={4}
+                  md={4}
+                  sm={6}
+                  xs={12}
+                >
+                  <CardComponent question={item} index={i} />
+                </Grid>
+              );
+            })
+          ) : (
+            <Grid item>
+              <div>
+                <p>
+                  Seems like your questions have not been added yet, Please
+                  contact admin
+                </p>
+              </div>
+            </Grid>
+          )}
+        </Grid>
+      </div>
+
       <AddAnswerModal
         open={openAnswer}
         handleClose={handleCloseAnswer}

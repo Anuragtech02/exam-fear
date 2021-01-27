@@ -50,15 +50,6 @@
         .searchInput {
           margin: 0;
           width: 100% !important;
-          .inputElement {
-            // border-color: var(--primaryDark) !important;
-            // label {
-            //   color: var(--primaryDark) !important;
-            // }
-            // fieldset{
-
-            // }
-          }
         }
       }
     }
@@ -79,28 +70,28 @@
     text-transform: capitalize;
     font-size: 1.2rem;
   }
-  .help {
-    display: flex;
-    justify-content: flex-start;
-    align-content: center;
-    .helpItem {
-      margin-left: 40px;
-      &:first-child {
-        margin: 0;
-      }
-      h5 {
-        font-weight: 400 !important;
-        margin: 5px 0 !important;
-        color: rgba(0, 0, 0, 0.5) !important;
-        font-size: 0.8rem;
-      }
-      h4 {
-        font-weight: 600 !important;
-        color: rgba(0, 0, 0, 0.7) !important;
-        font-size: 0.9rem;
-        margin: 0;
-      }
+  // .help {
+  //   display: flex;
+  //   justify-content: flex-start;
+  //   align-content: center;
+  .helpItem {
+    // margin-left: 40px;
+    // &:first-child {
+    //   margin: 0;
+    // }
+    h5 {
+      font-weight: 400 !important;
+      margin: 5px 0 !important;
+      color: rgba(0, 0, 0, 0.5) !important;
+      font-size: 0.8rem;
     }
+    h4 {
+      font-weight: 600 !important;
+      color: rgba(0, 0, 0, 0.7) !important;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    // }
   }
   .cardContainer {
     width: 100%;
@@ -148,5 +139,50 @@
     font-weight: 600;
     font-size: 1rem;
     color: rgba(0, 0, 0, 0.7);
+  }
+}
+.contentQuestion {
+  margin: 20px 0;
+}
+@media screen and (max-width: 1300px) {
+  .container {
+    .leftContainer {
+      margin-bottom: 50px;
+    }
+    .rightContainer {
+      align-items: center;
+      img {
+        max-width: 85%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    max-width: 85vw;
+    .leftContainer {
+      .searchBarContainer {
+        width: 100% !important;
+      }
+      .searchContainer {
+        .title {
+          h3 {
+            font-size: 2.5rem !important;
+          }
+          p {
+          }
+        }
+      }
+    }
+    .rightContainer {
+      align-items: center;
+      img {
+        max-width: 70%;
+      }
+    }
+  }
+  .contentQuestion {
+    margin: 30px 0;
   }
 }

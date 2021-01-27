@@ -28,6 +28,16 @@
   align-items: center;
   min-height: 100vh;
 }
+.centered h4 {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+}
+.centered p {
+  font-size: 1.2rem;
+  text-align: center;
+}
 .ant-tabs-nav .ant-tabs-tab-active {
   background: var(--primaryColor) !important;
 }

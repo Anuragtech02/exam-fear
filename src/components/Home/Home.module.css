@@ -94,33 +94,14 @@
   font-size: 1.2rem;
 }
 
-.container .help {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -ms-flex-line-pack: center;
-      align-content: center;
-}
-
-.container .help .helpItem {
-  margin-left: 40px;
-}
-
-.container .help .helpItem:first-child {
-  margin: 0;
-}
-
-.container .help .helpItem h5 {
+.container .helpItem h5 {
   font-weight: 400 !important;
   margin: 5px 0 !important;
   color: rgba(0, 0, 0, 0.5) !important;
   font-size: 0.8rem;
 }
 
-.container .help .helpItem h4 {
+.container .helpItem h4 {
   font-weight: 600 !important;
   color: rgba(0, 0, 0, 0.7) !important;
   font-size: 0.9rem;
@@ -187,5 +168,46 @@
   font-weight: 600;
   font-size: 1rem;
   color: rgba(0, 0, 0, 0.7);
+}
+
+.contentQuestion {
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 1300px) {
+  .container .leftContainer {
+    margin-bottom: 50px;
+  }
+  .container .rightContainer {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .container .rightContainer img {
+    max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    max-width: 85vw;
+  }
+  .container .leftContainer .searchBarContainer {
+    width: 100% !important;
+  }
+  .container .leftContainer .searchContainer .title h3 {
+    font-size: 2.5rem !important;
+  }
+  .container .rightContainer {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .container .rightContainer img {
+    max-width: 70%;
+  }
+  .contentQuestion {
+    margin: 30px 0;
+  }
 }
 /*# sourceMappingURL=Home.module.css.map */

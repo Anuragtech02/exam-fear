@@ -11,6 +11,7 @@ const App = () => {
         <Router>
           <Switch>
             <Route path="/:year/:branch" exact component={Home} />
+            <Route path="/" exact component={Default} />
           </Switch>
         </Router>
       </GlobalContextProvider>
@@ -19,3 +20,14 @@ const App = () => {
 };
 
 export default App;
+
+const Default = () => {
+  return (
+    <div className="flex-row centered">
+      <h4>You can check your paper through this link</h4>
+      <p>
+        Go to <strong>/year-1/cse</strong> for First Year CSE branch
+      </p>
+    </div>
+  );
+};
