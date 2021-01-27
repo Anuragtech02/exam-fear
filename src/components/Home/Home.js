@@ -19,8 +19,9 @@ import CustomTabs from "../CustomTabs/CustomTabs";
 import ViewAnswerModal from "../ViewAnswerModal/ViewAnswerModal";
 import CustomAccordion from "../CustomAccordion/CustomAccordion";
 import { useParams, withRouter } from "react-router";
+import firebase from "../../Firebase/firebase";
 
-const Home = () => {
+const Home = ({ history }) => {
   const { data, rno, subject, subCode, setYear, setBranch } = useContext(
     GlobalContext
   );
@@ -34,6 +35,7 @@ const Home = () => {
   const [questionParts, setQuestionParts] = useState([]);
 
   const [questions, setQuestions] = useState([]);
+  const [questionsBack, setQuestionsBack] = useState([]);
   // const [questBack, setQuestBack] = useState(questions);
   const [openAnswer, setOpenAnswer] = useState(false);
   // const [openAnswer, setOpenAnswer] = useState(false);
@@ -54,6 +56,7 @@ const Home = () => {
       // console.log(qParts);
       setQuestionParts(qParts);
       setQuestions(data);
+      setQuestionsBack(data);
     }
   }, [data]);
 
@@ -62,6 +65,18 @@ const Home = () => {
     console.log("Changed");
   }, [data]);
 
+  useEffect(() => {
+    const check = async () => {
+      const db = firebase.database();
+      const dbRef = db.ref(`${year}/${branch}`);
+      const status = (await dbRef.once("value")).exists();
+      if (!status) {
+        history.push(`/${year}/${branch}/enter-details`);
+      }
+    };
+    check();
+  }, [branch, year, history]);
+
   // useEffect(() => {
   //   setQuestions(data);
   //   // setQuestBack(data);
@@ -69,7 +84,7 @@ const Home = () => {
 
   const onChangeSearch = (e, value) => {
     if (questionParts.indexOf(value) !== -1) {
-      const current = questions;
+      const current = questionsBack;
       const newData = current.filter(
         (item) =>
           item.parts.findIndex(

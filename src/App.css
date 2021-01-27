@@ -28,7 +28,14 @@
   align-items: center;
   min-height: 100vh;
 }
-.centered h4 {
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.centered h4,
+.enter-details h4 {
   font-size: 1.5rem;
   text-align: center;
   font-weight: 600;
@@ -37,6 +44,31 @@
 .centered p {
   font-size: 1.2rem;
   text-align: center;
+}
+.centered label {
+  margin-left: 10px !important;
+}
+.enter-details .input-field-details {
+  margin: 10px 0;
+  max-width: 80%;
+  min-width: 280px;
+}
+.enter-details .submit-btn-container {
+  margin: 20px 0;
+}
+.enter-details .submit-btn-container .submit-btn {
+  background: var(--primaryDark) !important;
+  color: white;
+}
+.next-btn-container {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.next-btn-container .next-btn {
+  background: var(--primaryDark) !important;
+  color: white !important;
 }
 .ant-tabs-nav .ant-tabs-tab-active {
   background: var(--primaryColor) !important;
